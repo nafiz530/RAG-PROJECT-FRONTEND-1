@@ -21,6 +21,7 @@
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
+    "sonner": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.2",
