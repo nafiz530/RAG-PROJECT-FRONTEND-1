@@ -1,19 +1,31 @@
-// Login page for New Vision: Simple Google Sign-In button with Supabase OAuth.
-// Requests drive.file scope; redirects to /chat/new on success. Minimalist, animated UI.
-
 'use client';
 
-import { Button } from '@/components/ui/button'; // Assuming shadcn/ui Button is installed.
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'; // ← Add this import
+import { Button } from '@/components/ui/button';
 import { signInWithGoogle } from '@/lib/auth';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function Login() {
+  const router = useRouter();
+
+  // Redirect if already signed in
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        router.push('/chat/new');
+      }
+    });
+  }, [router]);
+
   const handleSignIn = async () => {
     try {
       await signInWithGoogle();
-      // Supabase handles redirect to /auth/callback, then to /chat/new via auth listener (implement in future).
+      // Supabase handles redirect via auth listener or callback
     } catch (error) {
       console.error('Sign-in error:', error);
+      alert('Sign-in failed. Please try again.'); // Simple alert (replace with toast later)
     }
   };
 
@@ -23,17 +35,20 @@ export default function Login() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-center space-y-4"
+        className="text-center space-y-6 max-w-md"
       >
+        <img src="/logo.png" alt="New Vision Logo" className="h-32 mx-auto mb-4" />
         <h2 className="text-2xl font-semibold">Sign In to New Vision</h2>
-        <p className="text-muted-foreground">Access AI-powered learning with Google.</p>
+        <p className="text-muted-foreground">
+          Access AI-powered textbook learning with Google.
+        </p>
         <Button
           onClick={handleSignIn}
           variant="outline"
-          className="flex items-center gap-2"
+          size="lg"
+          className="flex items-center gap-3 w-full max-w-xs mx-auto"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
-            {/* Google icon SVG */}
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
               fill="#4285F4"
@@ -47,10 +62,9 @@ export default function Login() {
               fill="#FBBC05"
             />
             <path
-              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.11-3.07C17.5 2.36 14.99 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               fill="#EA4335"
             />
-            <path d="M1 1h22v22H1z" fill="none" />
           </svg>
           Sign in with Google
         </Button>
