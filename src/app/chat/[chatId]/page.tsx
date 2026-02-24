@@ -42,8 +42,8 @@ export default function ChatPage() {
       setError(null);
 
       try {
-        // Load messages for this chat (fixed: only 2 arguments)
-        const loadedMessages = await loadMessages(chatId as string, session.user.id);
+        // Load messages for this chat (only 1 argument: chatId)
+        const loadedMessages = await loadMessages(chatId as string);
         setMessages(loadedMessages);
       } catch (err: any) {
         setError('Failed to load chat history. Please try again.');
