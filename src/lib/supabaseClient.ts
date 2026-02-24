@@ -1,9 +1,9 @@
-// Grok-optimized Supabase client: Browser-side initialization for secure, real-time auth and data ops.
-// Ensures seamless integration with Google Auth and future DB features in New Vision.
+// src/lib/supabaseClient.ts
+'use client';
 
-import { createBrowserClient } from '@supabase/ssr';
+import { createBrowserClient } from '@supabase/supabase-js';
 
-export const supabaseClient = createBrowserClient(
+export const supabase = createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
