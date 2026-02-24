@@ -11,7 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { Loader2, LogOut, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { signOut, getSession } from '@/lib/auth';
-import { supabaseClient } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 
 interface Chat {
   id: string;
