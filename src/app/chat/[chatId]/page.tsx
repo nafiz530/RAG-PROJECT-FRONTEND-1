@@ -42,7 +42,7 @@ export default function ChatPage() {
       setError(null);
 
       try {
-        // Load messages for this chat
+        // Load messages for this chat (fixed: only 2 arguments)
         const loadedMessages = await loadMessages(chatId as string, session.user.id);
         setMessages(loadedMessages);
       } catch (err: any) {
