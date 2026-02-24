@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 import Sidebar from '@/components/Sidebar';
 import WelcomeMessage from '@/components/WelcomeMessage';
 import ThreeDotMenu from '@/components/ThreeDotMenu';
