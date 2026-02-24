@@ -2,7 +2,7 @@
 // Securely uses access_token in headers. Assumes 'messages' table: id, chat_id, role, content, created_at.
 // Enhanced: Auto-title from first message, better error handling with custom errors, optimistic support (but rollback in UI).
 
-import { supabaseClient } from './supabaseClient';
+import { supabase } from './supabaseClient';
 import { Message, Chat as ChatType } from '@/types';
 
 const EDGE_FUNCTION_URL = 'https://vpentdpgxbaghcfsnuml.supabase.co/functions/v1/generate-response';
