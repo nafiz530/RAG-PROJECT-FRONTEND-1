@@ -1,7 +1,7 @@
 // Auth utilities for New Vision: Handles Google OAuth with drive.file scope for textbook integrations.
 // Secure, async helpers for sign-in, sign-out, and session management via Supabase.
 
-import { supabaseClient } from './supabaseClient';
+import { supabase } from './supabaseClient';
 
 export async function signInWithGoogle() {
   const { data, error } = await supabaseClient.auth.signInWithOAuth({
